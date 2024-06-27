@@ -1,10 +1,10 @@
 import Boom from "@hapi/boom";
-import bcrypt from 'bcrypt';
-import db from './db.js';
+import bcrypt from "bcrypt";
+import db from "./db.js";
 
 export const createUser = async ({ name, password }) => {
   let user;
-  console.log('creating user with', name, password)
+  console.log("creating user with", name, password);
   try {
     let passhash = await bcrypt.hash(password, 10);
 
@@ -12,7 +12,7 @@ export const createUser = async ({ name, password }) => {
       "INSERT INTO todos.person (name, pass) VALUES (${name}, ${passhash}) RETURNING *;",
       {
         passhash,
-        name
+        name,
       }
     );
   } catch (e) {
