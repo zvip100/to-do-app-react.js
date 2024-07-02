@@ -15,9 +15,9 @@ export const createTask = async (title, user_id) => {
   };
 };
 
-export const getTasks = async () => {
-  const result = await db.many(
-    "select * from todos.task where deleted_at is null"
+export const getTasks = async (user_id) => {
+  const result = await db.manyOrNone(
+    "select * from todos.task where deleted_at is null and user_id = ${user_id}", { user_id }
   );
 
   return result.map((task) => ({

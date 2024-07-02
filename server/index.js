@@ -6,6 +6,7 @@ if (!process.env.DATABASE_URL) {
 
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import tasksRoute from "./routes/tasks.js";
 import rootRoute from "./routes/root.js";
 import usersRoute from "./routes/users.js";
@@ -14,8 +15,12 @@ import authRoute from "./routes/auth.js";
 const PORT = process.env.PORT;
 
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 app.use(express.json());
+app.use(cookieParser("a-very-very-strong-and-super-secret-secret"))
 
 app.use("/", rootRoute);
 app.use("/tasks", tasksRoute);

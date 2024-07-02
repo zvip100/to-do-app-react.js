@@ -6,14 +6,27 @@ import AuthContext from "./auth";
 
 export default function Todos({ userId }) {
   const [tasks, setTasks] = useState([]);
+ useEffect(() => {
+   const maybeTasks = localStorage.getItem('tasks')
+  if (maybeTasks) {
+    setTasks(JSON.parse(maybeTasks))
+  }
+ }
+, [])
   const user = useContext(AuthContext);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(tasks))
+  }, [tasks])
 
   function updateTasks(task) {
     setTasks((tasks) => [...tasks, task]);
   }
 
   async function loadTasks() {
-    let response = await fetch("http://localhost:3000/tasks");
+    let response = await fetch("http://localhost:3000/tasks", {
+      credentials: "include"
+    });
     const result = await response.json();
     setTasks(result);
   }

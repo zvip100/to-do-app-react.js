@@ -9,6 +9,8 @@ function Login({ setCurrentUser }) {
     event.preventDefault();
     const res = await fetch("http://localhost:3000/auth/login", {
       method: "POST",
+      mode: "cors",
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
       },

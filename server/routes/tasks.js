@@ -1,5 +1,11 @@
 import { Router } from "express";
+import passport from "passport";
 const router = Router();
+
+
+router.use(passport.authenticate('cookie', {
+  session: false
+}))
 import { createTask, deleteTask, getTasks, markTaskAsDone } from "../controllers/tasks.js";
 
 router.post("/", async (req, res, next) => {
@@ -11,8 +17,9 @@ router.post("/", async (req, res, next) => {
 });
 
 router.get("/", async (req, res, next) => {
+  
   try {
-    const tasks= await getTasks()
+    const tasks= await getTasks(req.user.id)
     res.json(tasks)
   } catch (e) {
     next(e);
