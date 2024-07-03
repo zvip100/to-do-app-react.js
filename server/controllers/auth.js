@@ -1,10 +1,10 @@
 import db from "./db.js";
 import boom from "@hapi/boom";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export const login = async (username, password) => {
   const user = await db.oneOrNone(
-    "SELECT * FROM todos.person WHERE name = ${username}",
+    "SELECT * FROM public.person WHERE name = ${username}",
     {
       username,
     }

@@ -6,13 +6,13 @@ import { login } from "../controllers/auth.js";
 import passport from "passport";
 import LocalStrategy from "passport-local";
 import CookieStrategy from 'passport-cookie';
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import db from "../controllers/db.js";
 import jwt from 'jsonwebtoken'
 
 async function verify(username, password, done) {
   const user = await db.oneOrNone(
-    "SELECT * FROM todos.person WHERE name = ${username}",
+    "SELECT * FROM public.person WHERE name = ${username}",
     {
       username,
     }
