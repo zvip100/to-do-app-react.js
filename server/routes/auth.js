@@ -7,7 +7,7 @@ const router = Router();
 
 /**
  * Body : {email, password}
- 
+ */
 router.post(
   "/login",
   passport.authenticate("local", { session: false }),
@@ -34,5 +34,5 @@ router.post(
       .json({ ok: true });
   }
 );
-*/
+
 export default router;

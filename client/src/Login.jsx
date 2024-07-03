@@ -5,9 +5,7 @@ function Login({ setCurrentUser }) {
   const navigate = useNavigate();
   const usernameElem = useRef(null);
   const passwordElem = useRef(null);
-
   async function submitHandler(event) {
-    console.log(usernameElem.current.value);
     event.preventDefault();
     const res = await fetch("http://localhost:3000/auth/login", {
       method: "POST",
@@ -27,7 +25,6 @@ function Login({ setCurrentUser }) {
   }
 
   async function handleSignUp(event) {
-    console.log(passwordElem);
     event.preventDefault();
     const username = usernameElem.current.value;
     const password = passwordElem.current.value;

@@ -1,5 +1,5 @@
 import Boom from "@hapi/boom";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import db from "./db.js";
 
 export const createUser = async ({ name, password }) => {
@@ -9,7 +9,7 @@ export const createUser = async ({ name, password }) => {
     let passhash = await bcrypt.hash(password, 10);
 
     user = await db.one(
-      "INSERT INTO public.person (name, pass) VALUES (${name}, ${passhash}) RETURNING *;",
+      "INSERT INTO todos.person (name, pass) VALUES (${name}, ${passhash}) RETURNING *;",
       {
         passhash,
         name,

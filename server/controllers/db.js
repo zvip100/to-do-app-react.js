@@ -1,6 +1,7 @@
 import pgPromise from "pg-promise";
 
 const pgp = pgPromise();
+
 const db = pgp({
   host: "ep-white-field-a6m3jd5i.us-west-2.retooldb.com",
   port: 5432,
